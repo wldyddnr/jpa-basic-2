@@ -14,9 +14,6 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-//    @Column(name = "MEMBER_ID")
-//    private Long memberId;
-
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -26,7 +23,11 @@ public class Order {
     @Enumerated(EnumType.ORDINAL)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "ORDER")
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public Long getId() {
